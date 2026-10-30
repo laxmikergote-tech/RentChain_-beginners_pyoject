@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}New agreement | RentChain{% endblock %}
+{% block content %}
+<div class="page-heading"><div><div class="eyebrow">AGREEMENT WORKFLOW</div><h1>Create a rental agreement</h1><p class="muted">Fill in the details carefully. The tenant should already have an account to link automatically.</p></div><a class="btn secondary" href="{{ url_for('dashboard') }}">← Dashboard</a></div>
+<section class="panel form-panel"><form method="post" class="form">
+<h3 class="form-section-title">Tenant details</h3>
+<div class="form-grid"><label>Tenant full name<input name="tenant_name" required maxlength="100" placeholder="Tenant's full name"></label><label>Tenant registered email<input name="tenant_email" type="email" required maxlength="150" placeholder="tenant@example.com"></label></div>
+<h3 class="form-section-title">Property details</h3><label>Property address<textarea name="property_address" required rows="2" maxlength="500" placeholder="Full rental property address"></textarea></label>
+<div class="form-grid"><label>Monthly rent (₹)<input name="monthly_rent" type="number" min="1" step="0.01" required placeholder="18000"></label><label>Security deposit (₹)<input name="deposit" type="number" min="0" step="0.01" required placeholder="36000"></label></div>
+<div class="form-grid"><label>Start date<input name="start_date" type="date" required></label><label>End date<input name="end_date" type="date" required></label></div>
+<h3 class="form-section-title">Agreement terms</h3><label>Terms and conditions<textarea name="terms" required rows="5" maxlength="5000" placeholder="For example: rent due date, maintenance responsibilities, notice period..."></textarea></label>
+<div class="notice">This is a project demo, not a legal template. Review applicable local requirements before using a real agreement.</div>
+<button class="btn primary" type="submit">Create agreement and record fingerprint →</button>
+</form></section>
+{% endblock %}

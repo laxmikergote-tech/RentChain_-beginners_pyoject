@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}Verify agreement | RentChain{% endblock %}
+{% block content %}
+<div class="page-heading"><div><div class="eyebrow">INTEGRITY CHECK</div><h1>Verify an agreement</h1><p class="muted">Check whether the agreement data matches its recorded SHA-256 fingerprint.</p></div></div>
+<section class="panel narrow-panel"><form method="post" class="form"><label>Agreement ID<input name="agreement_id" type="number" min="1" required placeholder="Example: 1"></label><button class="btn primary" type="submit">Verify document</button></form>
+{% if result %}<div class="verify-result {{ 'good' if result.matches and result.ledger_recorded else 'bad' }}"><div class="verify-symbol">{{ '✓' if result.matches and result.ledger_recorded else '!' }}</div><h2>{{ 'Fingerprint matches' if result.matches and result.ledger_recorded else 'Verification needs attention' }}</h2><p>{% if result.matches and result.ledger_recorded %}The stored agreement fields match the saved fingerprint and the original demo-ledger entry.{% else %}The agreement data or ledger record does not match. Review the saved record and ledger.{% endif %}</p><small>Agreement #{{ result.agreement_id }}</small></div><div class="hash-compare"><div><small>Current fingerprint</small><code>{{ result.hash }}</code></div><div><small>Recorded fingerprint</small><code>{{ result.recorded_hash }}</code></div></div>{% endif %}
+<div class="notice">Integrity checking is only as trustworthy as the database and ledger that hold the original fingerprint. A real blockchain deployment is a separate project step.</div>
+</section>
+{% endblock %}

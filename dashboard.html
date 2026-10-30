@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Dashboard | RentChain{% endblock %}
+{% block content %}
+<div class="page-heading"><div><div class="eyebrow">YOUR WORKSPACE</div><h1>Good to see you, {{ current_user.name.split(' ')[0] }}.</h1><p class="muted">Here is the latest overview of your rental activity.</p></div>
+{% if current_user.role == 'landlord' %}<a class="btn primary" href="{{ url_for('new_agreement') }}">＋ New agreement</a>{% endif %}</div>
+<div class="stats-grid">
+<div class="stat-card"><span class="stat-icon">▤</span><small>Total agreements</small><strong>{{ agreements|length }}</strong><span class="stat-note">Available to your account</span></div>
+<div class="stat-card"><span class="stat-icon green">✓</span><small>Accepted</small><strong>{{ agreements|selectattr('status','equalto','Accepted')|list|length }}</strong><span class="stat-note">Agreements accepted</span></div>
+<div class="stat-card"><span class="stat-icon orange">◷</span><small>Pending</small><strong>{{ agreements|selectattr('status','equalto','Pending')|list|length }}</strong><span class="stat-note">Awaiting a response</span></div>
+<div class="stat-card"><span class="stat-icon purple">⌁</span><small>Ledger events</small><strong>{{ ledger_count }}</strong><span class="stat-note">Demo history entries</span></div>
+</div>
+<section class="panel"><div class="panel-heading"><div><h2>Rental agreements</h2><p class="muted">Your recent agreements and their current status.</p></div></div>
+{% if agreements %}
+<div class="table-wrap"><table><thead><tr><th>Property</th><th>Tenant</th><th>Monthly rent</th><th>Dates</th><th>Status</th><th></th></tr></thead><tbody>
+{% for a in agreements %}<tr><td><strong>{{ a.property_address }}</strong><small class="table-sub">Agreement #{{ a.id }}</small></td><td>{{ a.tenant_name }}<small class="table-sub">{{ a.tenant_email }}</small></td><td>₹{{ "%.2f"|format(a.monthly_rent) }}</td><td>{{ a.start_date }}<small class="table-sub">to {{ a.end_date }}</small></td><td><span class="status {{ a.status|lower }}">{{ a.status }}</span></td><td><a class="table-link" href="{{ url_for('agreement_detail', agreement_id=a.id) }}">View →</a></td></tr>{% endfor %}
+</tbody></table></div>
+{% else %}<div class="empty-state"><div class="empty-icon">▤</div><h3>No agreements yet</h3><p>{% if current_user.role == 'landlord' %}Create your first agreement to get started.{% else %}When a landlord creates an agreement using your registered email, it will appear here.{% endif %}</p>{% if current_user.role == 'landlord' %}<a class="btn primary" href="{{ url_for('new_agreement') }}">Create agreement</a>{% endif %}</div>{% endif %}
+</section>
+<section class="panel"><div class="panel-heading"><div><h2>Recent rent records</h2><p class="muted">Records entered by users, not verified bank payments.</p></div></div>
+{% if payments %}<div class="table-wrap"><table><thead><tr><th>Property</th><th>Month</th><th>Amount</th><th>Note</th></tr></thead><tbody>{% for p in payments %}<tr><td>{{ p.property_address }}</td><td>{{ p.payment_month }}</td><td>₹{{ "%.2f"|format(p.amount) }}</td><td>{{ p.note or "—" }}</td></tr>{% endfor %}</tbody></table></div>{% else %}<p class="empty-inline">No rent records have been added yet.</p>{% endif %}
+</section>
+{% endblock %}

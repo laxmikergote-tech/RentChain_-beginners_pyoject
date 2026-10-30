@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}Log in | RentChain{% endblock %}
+{% block content %}
+<div class="auth-wrap"><section class="auth-card"><div class="eyebrow">WELCOME BACK</div><h1>Log in to RentChain</h1><p class="muted">Access your rental agreements and records.</p>
+<form method="post" class="form">
+<label>Email address<input name="email" type="email" required placeholder="you@example.com"></label>
+<label>Password<input name="password" type="password" required placeholder="Your password"></label>
+<button class="btn primary full" type="submit">Log in</button>
+</form><p class="auth-bottom">New to RentChain? <a href="{{ url_for('register') }}">Create an account</a></p></section></div>
+{% endblock %}

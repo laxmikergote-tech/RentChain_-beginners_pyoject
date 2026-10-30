@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Create account | RentChain{% endblock %}
+{% block content %}
+<div class="auth-wrap"><section class="auth-card"><div class="eyebrow">JOIN RENTCHAIN</div><h1>Create your account</h1><p class="muted">Choose the role that matches how you will use the app.</p>
+<form method="post" class="form">
+<label>Full name<input name="name" required maxlength="100" placeholder="Enter your name"></label>
+<label>Email address<input name="email" type="email" required maxlength="150" placeholder="you@example.com"></label>
+<label>Password<input name="password" type="password" minlength="8" required placeholder="At least 8 characters"></label>
+<label>I am a<select name="role" required><option value="tenant">Tenant</option><option value="landlord">Landlord</option></select></label>
+<button class="btn primary full" type="submit">Create account</button>
+</form><p class="auth-bottom">Already registered? <a href="{{ url_for('login') }}">Log in</a></p></section></div>
+{% endblock %}

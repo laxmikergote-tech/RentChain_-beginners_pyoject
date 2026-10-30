@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block title %}Ledger | RentChain{% endblock %}
+{% block content %}
+<div class="page-heading"><div><div class="eyebrow">AUDIT TRAIL</div><h1>Demo ledger</h1><p class="muted">Recent events linked by hashes. This ledger runs in your local SQLite database.</p></div></div>
+<section class="panel"><div class="panel-heading"><h2>Recorded events</h2></div>
+{% for e in events %}<div class="ledger-item"><div class="ledger-number">{{ e.id }}</div><div class="ledger-body"><div class="ledger-title"><strong>{{ e.event_type|replace('_',' ')|title }}</strong><span class="small-note">Agreement #{{ e.agreement_id }}</span></div><small>{{ e.created_at }}</small><div class="hash-row"><span>Previous hash</span><code>{{ e.previous_hash }}</code></div><div class="hash-row"><span>Block hash</span><code>{{ e.block_hash }}</code></div><div class="hash-row"><span>Event data</span><code>{{ e.event_data }}</code></div></div></div>{% else %}<div class="empty-state"><h3>No events yet</h3><p>Create an agreement to add the first event.</p></div>{% endfor %}
+</section>
+{% endblock %}

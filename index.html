@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}RentChain | Rental agreements made simpler{% endblock %}
+{% block content %}
+<section class="hero">
+  <div class="hero-copy">
+    <div class="eyebrow"><span class="dot"></span> RENTAL AGREEMENT MANAGEMENT</div>
+    <h1>Renting, made<br><span>clear and secure.</span></h1>
+    <p>Create rental agreements, keep rent records, and check document integrity from one simple dashboard.</p>
+    <div class="hero-actions"><a class="btn primary" href="{{ url_for('register') }}">Create free account →</a><a class="btn secondary" href="{{ url_for('login') }}">I already have an account</a></div>
+    <div class="trust-row"><span>✓ Agreement history</span><span>✓ SHA-256 verification</span><span>✓ Role-based access</span></div>
+  </div>
+  <div class="hero-card">
+    <div class="card-top"><span class="mini-icon">▤</span><div><strong>Rental agreement</strong><small>Digital record · Demo</small></div><span class="status accepted">Recorded</span></div>
+    <div class="property"><div class="property-icon">⌂</div><div><strong>Apartment rental</strong><small>Property details and terms</small></div></div>
+    <div class="metric-row"><div><small>Monthly rent</small><strong>₹18,000</strong></div><div><small>Agreement term</small><strong>11 months</strong></div></div>
+    <div class="hash-box"><small>DOCUMENT FINGERPRINT</small><code>sha256: 9d7a…3f21</code><div class="verified">✓ Integrity check available</div></div>
+    <div class="card-foot"><span class="green-check">✓</span> History can be reviewed at any time</div>
+  </div>
+</section>
+<section class="features">
+  <div class="section-heading"><span class="eyebrow">BUILT FOR BOTH SIDES</span><h2>Everything in one place</h2><p>A straightforward workflow for landlords and tenants.</p></div>
+  <div class="feature-grid">
+    <article><div class="feature-icon">▤</div><h3>Digital agreements</h3><p>Keep property details, rent, deposit, dates, and terms together.</p></article>
+    <article><div class="feature-icon">⌁</div><h3>Document verification</h3><p>Use a SHA-256 fingerprint to check if stored agreement data matches its original fingerprint.</p></article>
+    <article><div class="feature-icon">◷</div><h3>Rent records</h3><p>Maintain a record of rent amounts and months. No money is transferred by this demo.</p></article>
+  </div>
+</section>
+{% endblock %}

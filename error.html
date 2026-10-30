@@ -1,0 +1,3 @@
+{% extends "base.html" %}
+{% block title %}Error {{ code }} | RentChain{% endblock %}
+{% block content %}<div class="error-page"><div class="eyebrow">REQUEST COULD NOT BE COMPLETED</div><h1>{{ code }}</h1><p>{{ message }}</p><a class="btn primary" href="{{ url_for('dashboard') if current_user else url_for('index') }}">Go back</a></div>{% endblock %}
